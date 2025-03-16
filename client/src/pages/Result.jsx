@@ -1,31 +1,75 @@
-import { useState } from "react";
-import { assets } from "../assets/assets";
+import { useContext, useState } from "react";
+import { AppContext } from "../context/AppContext";
 
 const Result = () => {
-  const [imageLoaded, setImageLoaded] = useState(true);
+  const [image, setImage] = useState(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
+  const { generateImage } = useContext(AppContext);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    console.log("Generating image for prompt:", input);
 
-  }
+    if (!input.trim()) {
+      alert("Please enter a prompt.");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const generatedImage = await generateImage(input);
+      console.log("Generated Image URL:", generatedImage);
+
+      if (generatedImage) {
+        setImage(generatedImage);
+        setImageLoaded(true);
+        setInput("");
+      } else {
+        console.error("No image received from API.");
+        alert("Failed to generate image. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error generating image:", error);
+      alert("An error occurred while generating the image.");
+    }
+    setLoading(false);
+  };
+
   return (
-    <form onSubmit={onSubmit} className="flex flex-col items-center min-h-[90vh] ">
-      <div>
-        <div className="relative">
-          <img src={assets.sample_img_1} alt="" className="w-full rounded" />
-          <span
-            className={`absolute buttom-0 left-o h-1 bg-blue-500 ${
-              loading ? " w-full transition-all duration-[10s]" : "w-0"
-            }`}
-          ></span>
-        </div>
-
-        <p className={!loading ? "hidden" : ""}>Loading...</p>
+    <form
+      onSubmit={onSubmit}
+      className="flex flex-col items-center min-h-[90vh]"
+    >
+      <div className="relative w-[20rem] h-[20rem] mt-[8rem] flex items-center justify-center bg-gray-300 rounded">
+        {image ? (
+          <img
+            src={image}
+            alt="Generated"
+            className="w-[25rem] h-[20rem]  object-cover rounded"
+            onLoad={() => setImageLoaded(true)}
+            onError={() => {
+              console.error("Failed to load image.");
+              setImage(null);
+              setImageLoaded(false);
+            }}
+          />
+        ) : (
+          <p className="text-gray-600">Please Enter the prompt</p>
+        )}
+        <span
+          className={`absolute bottom-0 left-0 h-1 bg-blue-500 ${
+            loading ? "w-full transition-all duration-[10s] ease-linear" : "w-0"
+          }`}
+        ></span>
       </div>
 
+      {loading && <p>Loading...</p>}
+
       {!imageLoaded && (
-        <div className="flex items-center mt-8 text-white w-full max-w-xl bg-neutral-500 rounded-full text-sm p-0.5 ">
+        <div className="flex items-center mt-8 text-white w-full max-w-xl bg-neutral-500 rounded-full text-sm p-0.5">
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -43,19 +87,21 @@ const Result = () => {
       )}
 
       {imageLoaded && (
-        <div className="flex gap-2 flex-wrap justify-center text-white text-smp-0.5 mt-10 rounded-full">
+        <div className="flex gap-2 flex-wrap justify-center text-white text-sm p-0.5 mt-10 rounded-full">
           <p
             onClick={() => {
+              setImage(null);
               setImageLoaded(false);
-              setLoading(true);
+              setLoading(false);
+              setInput("");
             }}
             className="bg-transparent border border-zinc-900 text-black px-8 py-3 rounded-full cursor-pointer hover:scale-105 transition-transform duration-75"
           >
             Generate another
           </p>
           <a
-            download
-            href=""
+            download="generated-image.png"
+            href={image}
             className="bg-zinc-900 px-10 py-3 rounded-full cursor-pointer hover:scale-105 transition-transform duration-75"
           >
             Download

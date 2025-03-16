@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { assets } from "../assets/assets";
 
 const Header = () => {
@@ -20,9 +21,11 @@ const Header = () => {
         watch the magic unfold.
       </p>
 
-      <button className="bg-black flex items-center text-white px-10 py-2 rounded-full mt-10 hover:scale-105 transition-transform">
-        Get Started <img src={assets.star_group} alt="" className="w-8 h-6" />
-      </button>
+      <Link to="/result">
+        <button className="bg-black flex items-center text-white px-10 py-2 rounded-full mt-10 hover:scale-105 transition-transform">
+          Get Started <img src={assets.star_group} alt="" className="w-8 h-6" />
+        </button>
+      </Link>
 
       <div className="flex gap-2 mt-10">
         {Array(6)
@@ -39,7 +42,9 @@ const Header = () => {
           ))}
       </div>
 
-      <p className="mt-2 text-neutral-500">Generated Images from <span className="text-blue-500">Imagify</span></p>
+      <p className="mt-2 text-neutral-500">
+        Generated Images from <span className="text-blue-500">Imagify</span>
+      </p>
     </div>
   );
 };

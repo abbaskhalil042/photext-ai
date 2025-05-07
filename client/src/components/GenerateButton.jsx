@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom";
 import { assets } from "../assets/assets";
-
+import { motion } from "framer-motion";
 const GenerateButton = () => {
   return (
-    <div className="pb-16 text-center">
+    <motion.div
+      initial={{ opacity: 0.2, y: 100 }}
+      transition={{ duration: 1 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="pb-16 text-center"
+    >
       <h1 className="text-2xl md:text-3xl font-semibold text-neutral-800 py-6 lg:text-4xl">
         See the magic. Try Now
       </h1>
@@ -13,7 +19,7 @@ const GenerateButton = () => {
           <img src={assets.star_group} alt=" star " className="h-7" />
         </button>
       </Link>
-    </div>
+    </motion.div>
   );
 };
 

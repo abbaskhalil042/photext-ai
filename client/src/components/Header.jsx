@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom";
 import { assets } from "../assets/assets";
-
+import {motion} from "framer-motion"
 const Header = () => {
   return (
-    <div className="flex flex-col justify-between items-center text-center my-20">
+    <motion.div
+    
+    initial={{ opacity: 0.2, y: 100 }}
+    transition={{ duration: 1 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    className="flex flex-col justify-between items-center text-center my-20">
       <div
         className="text-stone-500 inline-flex text-center gap-2 bg-white px-6 p-1 
     rounded-full border border-neutral-500"
@@ -43,9 +49,9 @@ const Header = () => {
       </div>
 
       <p className="mt-2 text-neutral-500">
-        Generated Images from <span className="text-blue-500">Imagify</span>
+        Generated Images from <span className="text-blue-500">photext-ai</span>
       </p>
-    </div>
+    </motion.div>
   );
 };
 

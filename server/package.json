@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "main": "index.js",
-"type": "module",
+  "type": "module",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
@@ -21,6 +21,6 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.5",
     "nodemon": "^3.1.9",
-    "razorpay": "^2.9.5"
+    "razorpay": "^2.9.6"
   }
 }

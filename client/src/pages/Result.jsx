@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
-
+import { motion } from "framer-motion";
 const Result = () => {
   const [image, setImage] = useState(null);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -39,7 +39,11 @@ const Result = () => {
   };
 
   return (
-    <form
+    <motion.form
+      initial={{ opacity: 0.2, y: 100 }}
+      transition={{ duration: 1 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
       onSubmit={onSubmit}
       className="flex flex-col items-center min-h-[90vh]"
     >
@@ -108,7 +112,7 @@ const Result = () => {
           </a>
         </div>
       )}
-    </form>
+    </motion.form>
   );
 };
 

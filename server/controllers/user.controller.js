@@ -2,6 +2,9 @@ import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+import razorpay from "razorpay";
+import Transaction from "../models/transaction-model.js";
+
 const register = async (req, res) => {
   try {
     const { username, email, password } = req.body;
@@ -103,4 +106,100 @@ const userCredits = async (req, res) => {
   }
 };
 
-export { register, login, userCredits };
+//* Razorpay
+const razorpayInstance = new razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET,
+});
+
+const paymentRazorpay = async (req, res) => {
+  try {
+    const { userId, planId } = req.body;
+
+    if (!userId || !planId) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Please fill in all fields" });
+    }
+
+    const userData = await User.findById(userId);
+    if (!userData) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
+    let credits, plan, amount, date;
+
+    switch (planId) {
+      case "Basic":
+        credits = 100;
+        plan = "Basic";
+        amount = 10;
+        date = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days from now
+        break;
+      case "Advanced":
+        credits = 500;
+        plan = "Advanced";
+        amount = 50;
+        date = new Date(Date.now() + 60 * 24 * 60 * 1000); // 60 days from now
+        break;
+      case "Business":
+        credits = 5000;
+        plan = "Business";
+        amount = 250;
+        date = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000); // 90 days from now
+        break;
+      default:
+        return res.status(400).json({
+          success: false,
+          message: "Invalid plan ID",
+        });
+    }
+
+    const transactionDetails = {
+      userId: userId,
+      plan: plan,
+      credits: credits,
+      amount: amount,
+      date: date,
+    };
+
+    const newTransaction = await Transaction.create(transactionDetails);
+    console.log(newTransaction);
+
+    await razorpayInstance.orders.create(
+      {
+        amount: amount * 100, // Amount in INR
+        currency: process.env.CURRENCY,
+        receipt: newTransaction._id.toString(), // Receipt ID unique to the transaction
+        notes: {
+          userId: userId,
+          planId: planId,
+        },
+      },
+      (err, order) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({
+            success: false,
+            message: "Error creating Razorpay order",
+          });
+        }
+
+        res.status(200).json({
+          success: true,
+          orderId: order.id,
+          amount: amount,
+          credits: credits,
+          plan: plan,
+        });
+      }
+    );
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
+
+export { register, login, userCredits, paymentRazorpay };

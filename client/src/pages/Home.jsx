@@ -3,16 +3,17 @@ import GenerateButton from "../components/GenerateButton";
 import Header from "../components/Header";
 import Steps from "../components/Steps";
 import Testimonials from "../components/Testimonials";
-
+import { motion } from "framer-motion";
 const Home = () => {
   return (
-    <div>
+    <div
+   
+    >
       <Header />
       <Steps />
       <Description />
       <Testimonials />
       <GenerateButton />
-      
     </div>
   );
 };

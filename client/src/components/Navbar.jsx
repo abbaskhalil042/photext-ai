@@ -1,10 +1,18 @@
 import { Link, useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
 
 const Navbar = () => {
-  const { user, setShowLogin,logout,credit } = useContext(AppContext);
+  const [hoverShown, setHoverShown] = useState(false);
+  const handleHover = () => {
+    setHoverShown(!hoverShown);
+    setTimeout(() => {
+      setHoverShown(false);
+    }, 2000);
+  };
+
+  const { user, setShowLogin, logout, credit } = useContext(AppContext);
   console.log(user?.name);
   console.log(credit);
 
@@ -14,7 +22,8 @@ const Navbar = () => {
   return (
     <div className="flex justify-between items-center py-4">
       <Link className="flex items-center gap-2" to="/">
-        <img src={assets.logo} alt="" className="w-28 sm:w-32 lg:w-8" /><span  className="text-2xl sm:text-3xl font-semibold">Photext</span>
+        <img src={assets.logo} alt="" className="w-28 sm:w-32 lg:w-8" />
+        <span className="text-2xl sm:text-3xl font-semibold">Photext</span>
       </Link>
 
       <div>
@@ -29,16 +38,25 @@ const Navbar = () => {
                 credit left :{credit}
               </p>
             </button>
-            <p className="text-xs sm:text-sm mx-sm:hidden pl-4">Hi,{user?.name}</p>
+            <p className="text-xs sm:text-sm mx-sm:hidden pl-4">
+              Hi,{user?.name}
+            </p>
             <div className="relative group">
               <img
+                onMouseEnter={handleHover}
                 src={assets.profile_icon}
                 alt=""
-                className="w-10 drop-shadow-md"
+                className="w-10 drop-shadow-md cursor-pointer"
               />
-              <div className="absolute top-12 right-0 z-10 text-sm border bg-white p-1 rounded-md shadow-lg">
+              <div
+                className={`absolute top-12  ${
+                  hoverShown ? "block" : "hidden"
+                } right-0 z-10 text-sm border bg-white p-1 rounded-md shadow-lg`}
+              >
                 <ul className="list-none m-0 px-5 bg-white rounded-md border text-sm">
-                  <li onClick={logout} className="py-1 px-2 cursor-pointer">logout</li>
+                  <li onClick={logout} className="py-1 px-2 cursor-pointer">
+                    logout
+                  </li>
                 </ul>
               </div>
             </div>

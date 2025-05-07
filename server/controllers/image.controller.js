@@ -2,6 +2,9 @@ import FormData from "form-data";
 import User from "../models/user.model.js";
 import axios from "axios";
 
+import dotevn from "dotenv";
+dotevn.config();
+
 export const generateImage = async (req, res) => {
   const { userId, prompt } = req.body;
 

@@ -1,6 +1,12 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
+
+console.log("Razorpay Key:", process.env.RAZORPAY_KEY_ID);
+console.log("Razorpay Secret:", process.env.RAZORPAY_KEY_SECRET);
+console.log("Razorpay Currency:", process.env.JWT_SECRET);
 
 import razorpay from "razorpay";
 import Transaction from "../models/transaction-model.js";
@@ -107,12 +113,18 @@ const userCredits = async (req, res) => {
 };
 
 //* Razorpay
+
 const razorpayInstance = new razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
 
 const paymentRazorpay = async (req, res) => {
+  console.log(
+    "Payment Razorpay called",
+    process.env.RAZORPAY_KEY_ID,
+    process.env.RAZORPAY_KEY_SECRET
+  );
   try {
     const { userId, planId } = req.body;
 
@@ -202,4 +214,47 @@ const paymentRazorpay = async (req, res) => {
   }
 };
 
-export { register, login, userCredits, paymentRazorpay };
+//*verify razorpay payment
+
+const verifyPayment = async (req, res) => {
+  try {
+    const { orderId } = req.body;
+
+    console.log("333333333333333333333333333333333333333333333333333333333Razorpay Order ID:", orderId);
+
+    const orderInfo = await razorpayInstance.orders.fetch(orderId);
+
+    if (orderInfo.status !== "paid") {
+      const transactionData = await Transaction.findById(orderInfo.receipt);
+
+      if (transactionData.payment) {
+        return res
+          .status(400)
+          .json({ success: false, message: "Payment failed" });
+      }
+
+      const userData = await User.findById(transactionData.userId);
+      userData.creditBalance += transactionData.credits;
+      await User.findByIdAndUpdate(userData._id, {
+        creditBalance: userData.creditBalance,
+      });
+
+      await Transaction.findByIdAndUpdate(transactionData._id, {
+        payment: true,
+      });
+      return res
+        .status(200)
+        .json({ success: true, message: "Payment successful" });
+    } else {
+      return res.status(400).json({
+        success: false,
+        message: "Payment failed",
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
+
+export { register, login, userCredits, paymentRazorpay, verifyPayment };

@@ -1,12 +1,18 @@
 import express from "express";
-import cors from "cors";
 import dotenv from "dotenv";
+dotenv.config();
+import cors from "cors";
 import connect from "./config/mongodb.js";
 import router from "./routes/user.routes.js";
 import imageRouter from "./routes/image.routes.js";
 
 // Load environment variables as early as possible
-dotenv.config();
+
+console.log("PORT:", process.env.PORT);
+console.log("Loading environment variables...");
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("JWT_SECRET:", process.env.JWT_SECRET);
+console.log("MONGODB_URI:", process.env.MONGODB_URI);
 
 const PORT = process.env.PORT || 5000;
 

@@ -48,7 +48,7 @@ const Header = () => {
           ))}
       </div>
 
-      <p className="mt-2 text-neutral-500">
+      <p className="mt-2 text-neutral-500 bg-white px-6 p-1 rounded-full border border-neutral-500">
         Generated Images from <span className="text-blue-500">photext-ai</span>
       </p>
     </motion.div>

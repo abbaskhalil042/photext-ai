@@ -20,9 +20,9 @@ const Navbar = () => {
   // const {setShowLogin} = useContext(AppContext);
 
   return (
-    <div className="flex justify-between items-center py-4">
-      <Link className="flex items-center gap-2" to="/">
-        <img src={assets.logo} alt="" className="w-28 sm:w-32 lg:w-8" />
+    <div className="flex justify-between items-center py-4 ">
+      <Link className="flex items-center gap-2 animate-bounce" to="/">
+        <img src={assets.logo} alt="" className="w-28 sm:w-32 lg:w-8 " />
         <span className="text-2xl sm:text-3xl font-semibold">Photext</span>
       </Link>
 

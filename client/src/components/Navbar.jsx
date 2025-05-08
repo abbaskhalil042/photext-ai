@@ -28,12 +28,11 @@ const Navbar = () => {
   // const {setShowLogin} = useContext(AppContext);
 
   return (
-    <div className="flex justify-between items-center py-4 ">
+    <div className="flex justify-between items-center py-4 fixed top-0 left-0 right-0 z-10  px-4 sm:px-10 lg:px-20 ">
       <Link className="flex items-center gap-2 animate-bounce" to="/">
         <img src={assets.logo} alt="" className="w-6 lg:w-8 " />
         <span className="text-2xl sm:text-3xl font-semibold">Photext</span>
       </Link>
-      
 
       <div>
         {user ? (
@@ -96,7 +95,6 @@ const Navbar = () => {
           </div>
         )}
       </div>
-  
     </div>
   );
 };

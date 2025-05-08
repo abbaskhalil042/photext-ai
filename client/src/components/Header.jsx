@@ -9,7 +9,7 @@ const Header = () => {
       transition={{ duration: 1 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="flex flex-col justify-between py-20 items-center text-center my-0"
+      className="flex flex-col justify-between py-16 items-center text-center"
     >
       <div
         className="text-stone-500 inline-flex text-center gap-2 bg-white px-6 p-1 
@@ -22,7 +22,7 @@ const Header = () => {
         Turn text to <span className="text-blue-500">image</span>, in seconds.
       </h1>
       <HeaderCarousel />
- 
+
       <div className="flex gap-2 mt-10">
         {Array(6)
           .fill("")
@@ -48,8 +48,6 @@ const Header = () => {
           Get Started <img src={assets.star_group} alt="" className="w-8 h-6" />
         </button>
       </Link>
-
-
 
       <p className="mt-2 text-neutral-500 bg-white px-6 p-1 rounded-full border border-neutral-500">
         Generated Images from <span className="text-blue-500">photext-ai</span>

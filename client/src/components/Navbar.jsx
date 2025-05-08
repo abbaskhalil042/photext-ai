@@ -31,7 +31,7 @@ const Navbar = () => {
     <div className="flex justify-between items-center py-4 fixed top-0 left-0 right-0 z-10  px-4 sm:px-10 lg:px-20 ">
       <Link className="flex items-center gap-2 animate-bounce" to="/">
         <img src={assets.logo} alt="" className="w-6 lg:w-8 " />
-        <span className="text-2xl sm:text-3xl font-semibold">Photext</span>
+        <span className="lg:text-2xl text-xl font-semibold">Photext</span>
       </Link>
 
       <div>
@@ -40,11 +40,11 @@ const Navbar = () => {
             <button
               onMouseEnter={handleShowCreditText}
               onClick={() => navigateTo("/buy-credit")}
-              className="bg-blue-100 text-white px-4  flex items-center gap-2 sm:px-6 py-1.5 sm:py-2 rounded-full hover:scale-105 transition-transform"
+              className="bg-black  text-white px-4  flex items-center gap-2 sm:px-6 py-1.5 sm:py-2 rounded-full hover:scale-105 transition-transform"
             >
               <img src={assets.credit_star} alt="" />
               <p
-                className={`text-xs hidden lg:flex font-medium text-gray-600 ${
+                className={`text-xs hidden lg:flex font-medium text-white ${
                   showCreditText ? "flex" : ""
                 } `}
               >

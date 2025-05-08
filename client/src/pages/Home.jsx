@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 const Home = () => {
   return (
     <div
+    className="text-[#435c40]"
    
     >
  

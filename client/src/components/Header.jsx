@@ -18,6 +18,12 @@ const Header = () => {
         <p>Best text to image generator</p>
         <img src={assets.star_icon} alt="" />
       </div>
+      
+      <Link to="/result">
+        <button className="bg-black flex items-center text-white px-10 py-2 rounded-full mt-10 hover:scale-105 transition-transform">
+          Get Started <img src={assets.star_group} alt="" className="w-8 h-6" />
+        </button>
+      </Link>
       <h1 className="text-4xl max-w-[300px] sm:text-5xl sm:max-w-[590px] mx-auto mt-10 text-center">
         Turn text to <span className="text-blue-500">image</span>, in seconds.
       </h1>
@@ -43,11 +49,6 @@ const Header = () => {
         watch the magic unfold.
       </p>
 
-      <Link to="/result">
-        <button className="bg-black flex items-center text-white px-10 py-2 rounded-full mt-10 hover:scale-105 transition-transform">
-          Get Started <img src={assets.star_group} alt="" className="w-8 h-6" />
-        </button>
-      </Link>
 
       <p className="mt-2 text-neutral-500 bg-white px-6 p-1 rounded-full border border-neutral-500">
         Generated Images from <span className="text-blue-500">photext-ai</span>

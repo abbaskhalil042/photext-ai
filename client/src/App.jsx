@@ -13,19 +13,21 @@ const App = () => {
   const { showLogin } = useContext(AppContext);
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-    <div className="px-4 sm:px-10 md:px-20 lg:px-35 min-h-screen bg-gradient-to-b from-teal-100 to-orange-100">
-      <ToastContainer position="bottom-right" />
-      <Navbar />
+      <div
+        className="px-4 sm:px-10 md:px-20 lg:px-35 min-h-screen bg-[#f0f1ea]"
+      >
+        <ToastContainer position="bottom-right" />
+        <Navbar />
 
-      {showLogin && <Login />}
+        {showLogin && <Login />}
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/result" element={<Result />} />
-        <Route path="/buy-credit" element={<BuyCredit />} />
-      </Routes>
-      <Footer />
-    </div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/result" element={<Result />} />
+          <Route path="/buy-credit" element={<BuyCredit />} />
+        </Routes>
+        <Footer />
+      </div>
     </ThemeProvider>
   );
 };

@@ -45,7 +45,7 @@ const Result = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       onSubmit={onSubmit}
-      className="flex flex-col items-center min-h-[90vh]"
+      className="flex flex-col items-center min-h-[85vh]"
     >
       <div className="relative w-[20rem] h-[20rem] mt-[8rem] flex items-center justify-center bg-gray-300 rounded">
         {image ? (

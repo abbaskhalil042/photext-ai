@@ -9,27 +9,48 @@ const Header = () => {
       transition={{ duration: 1 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="flex flex-col justify-between py-16 items-center text-center"
+      className="flex flex-col justify-between py-32 "
     >
-      <div
-        className="text-stone-500 inline-flex text-center gap-2 bg-white px-6 p-1 
-    rounded-full border border-neutral-500"
-      >
-        <p>Best text to image generator</p>
-        <img src={assets.star_icon} alt="" />
-      </div>
-      
-      <Link to="/result">
-        <button className="bg-black flex items-center text-white px-10 py-2 rounded-full mt-10 hover:scale-105 transition-transform">
-          Get Started <img src={assets.star_group} alt="" className="w-8 h-6" />
-        </button>
-      </Link>
-      <h1 className="text-4xl max-w-[300px] sm:text-5xl sm:max-w-[590px] mx-auto mt-10 text-center">
-        Turn text to <span className="text-blue-500">image</span>, in seconds.
-      </h1>
-      <HeaderCarousel />
+      <div className="flex gap-2 items-center justify-evenly max-sm:flex-col">
+        <div className="flex flex-col gap-2 max-sm:gap-4">
+          <div className="flex    gap-2">
+            <h1 className="text-4xl max-w-[300px] sm:text-5xl sm:max-w-[590px] mx-auto mt-10 ">
+              <span className=" text-blue-900 font-bold font-serif italic">
+                Photext-AI
+              </span>{" "}
+              Turn text to <span className="text-blue-900">image</span>, in
+              seconds.
+            </h1>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4 mt-4 items-start sm:items-center">
+            {/* Info Badge */}
+            <div className="text-stone-500 flex items-center gap-2 bg-white px-8 py-3 rounded-full border border-neutral-200 shadow-md">
+              <p className="text-lg font-semibold whitespace-nowrap">
+                Best text to image generator
+              </p>
+              <img src={assets.star_icon} alt="star icon" className="w-6 h-6" />
+            </div>
 
-      <div className="flex gap-2 mt-10">
+            {/* Button */}
+            <Link to="/result">
+              <button className="bg-black flex items-center text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-all ease-in-out duration-300 hover:scale-105 shadow-lg whitespace-nowrap">
+                Get Started
+                <img
+                  src={assets.star_group}
+                  alt="star group"
+                  className="w-8 h-6 ml-2"
+                />
+              </button>
+            </Link>
+          </div>
+        </div>
+
+        <div>
+          <HeaderCarousel />
+        </div>
+      </div>
+
+      <div className="flex justify-center gap-2 mt-10">
         {Array(6)
           .fill("")
           .map((_, index) => (
@@ -49,8 +70,7 @@ const Header = () => {
         watch the magic unfold.
       </p>
 
-
-      <p className="mt-2 text-neutral-500 bg-white px-6 p-1 rounded-full border border-neutral-500">
+      <p className="mx-auto mt-2 text-neutral-500 bg-white px-6 p-1 rounded-full border border-neutral-500">
         Generated Images from <span className="text-blue-500">photext-ai</span>
       </p>
     </motion.div>

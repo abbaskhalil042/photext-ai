@@ -30,8 +30,98 @@ const Navbar = () => {
   return (
     <div className="flex justify-between items-center py-4 fixed top-0 left-0 right-0 z-10  px-4 sm:px-10 lg:px-20 ">
       <Link className="flex items-center gap-2 animate-bounce" to="/">
-        <img src={assets.logo} alt="" className="w-6 lg:w-8 " />
-        <span className="lg:text-2xl text-xl font-semibold">Photext</span>
+        <svg
+          width="60"
+          height="60"
+          viewBox="0 0 200 200"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#6E45E2" />
+              <stop offset="100%" stop-color="#89D4CF" />
+            </linearGradient>
+          </defs>
+
+          <circle cx="100" cy="100" r="70" fill="url(#gradient)" />
+
+          <circle
+            cx="100"
+            cy="100"
+            r="40"
+            fill="none"
+            stroke="white"
+            stroke-width="2"
+            stroke-dasharray="5,5"
+          />
+
+          <path
+            d="M100,60 L120,100 L100,140 L80,100 Z"
+            fill="white"
+            opacity="0.8"
+          />
+          <path
+            d="M60,100 L100,120 L140,100 L100,80 Z"
+            fill="white"
+            opacity="0.6"
+          />
+
+          {/* <text
+            x="100"
+            y="180"
+            text-anchor="middle"
+            font-family="Arial"
+            font-size="54"
+            fill="#333"
+          >
+            PHOTEXT
+          </text> */}
+        </svg>
+
+        {/* <svg
+          width="50"
+          height="50"
+          viewBox="0 0 200 200"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M70,30 L130,30 Q150,50 130,70 L70,70 Q50,50 70,30 Z"
+            fill="#4A4A4A"
+          />
+
+          <path
+            d="M100,70 Q110,90 100,110 Q90,130 100,150"
+            stroke="#6E45E2"
+            stroke-width="8"
+            fill="none"
+          />
+          <circle cx="100" cy="70" r="5" fill="#89D4CF" />
+          <circle cx="100" cy="110" r="5" fill="#89D4CF" />
+          <circle cx="100" cy="150" r="5" fill="#89D4CF" />
+
+          <path
+            d="M120,160 Q140,150 160,160 Q150,180 130,170 Z"
+            fill="#6E45E2"
+            opacity="0.7"
+          />
+          <path
+            d="M140,140 Q160,130 170,150 Q160,160 150,150 Z"
+            fill="#89D4CF"
+            opacity="0.7"
+          />
+
+          <text
+            x="100"
+            y="190"
+            text-anchor="middle"
+            font-family="Arial"
+            font-size="18"
+            fill="#333"
+          >
+            AI IMAGE GENERATOR
+          </text>
+        </svg> */}
+        {/* <span className="lg:text-2xl text-xl font-semibold">Photext</span> */}
       </Link>
 
       <div>

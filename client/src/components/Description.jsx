@@ -1,5 +1,6 @@
 import { assets } from "../assets/assets";
 import { motion } from "framer-motion";
+import { HeaderCarousel } from "./HeaderCarousel";
 const Description = () => {
   return (
     <motion.div
@@ -13,11 +14,7 @@ const Description = () => {
       <p className="text-lg text-gray-500">Turn your imagination into visual</p>
 
       <div className="flex flex-col mt-10 gap-5 md:gap-14 md:flex-row items-center">
-        <img
-          src={assets.sample_img_1}
-          className="w-80 xl:w-96 rounded-lg"
-          alt=""
-        />
+        <HeaderCarousel />
         <div>
           <h2 className="text-3xl font-medium mb-4 max-w-lg">
             Introducing the AI-Powered texst to Image Generator.

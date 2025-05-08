@@ -5,7 +5,7 @@ const Footer = () => {
     <div className="flex items-center justify-between gap-4 py-3 mt-10">
       <img src={assets.logo} alt="logo" className="w-8" />
       <p className=" flex-1 text-gray-500  border-l-2 border-gray-400 pl-4 text-sm max:sm:hidden">
-        Copyright © 2023 | All rights reserved
+        Copyright © 2024 | All rights reserved
       </p>
 
       <div className="flex items-center gap-4">

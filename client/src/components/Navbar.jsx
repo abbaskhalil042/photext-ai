@@ -5,6 +5,7 @@ import { AppContext } from "../context/AppContext";
 
 const Navbar = () => {
   const [hoverShown, setHoverShown] = useState(false);
+  const [showCreditText, setShowCreditText] = useState(false);
   const handleHover = () => {
     setHoverShown(!hoverShown);
     setTimeout(() => {
@@ -12,6 +13,12 @@ const Navbar = () => {
     }, 2000);
   };
 
+  const handleShowCreditText = () => {
+    setShowCreditText(!showCreditText);
+    setTimeout(() => {
+      setShowCreditText(false);
+    }, 2000);
+  };
   const { user, setShowLogin, logout, credit } = useContext(AppContext);
   console.log(user?.name);
   console.log(credit);
@@ -22,7 +29,7 @@ const Navbar = () => {
   return (
     <div className="flex justify-between items-center py-4 ">
       <Link className="flex items-center gap-2 animate-bounce" to="/">
-        <img src={assets.logo} alt="" className="w-28 sm:w-32 lg:w-8 " />
+        <img src={assets.logo} alt="" className="w-6 lg:w-8 " />
         <span className="text-2xl sm:text-3xl font-semibold">Photext</span>
       </Link>
 
@@ -30,15 +37,20 @@ const Navbar = () => {
         {user ? (
           <div className="flex items-center gap-2 sm:gap-4">
             <button
+              onMouseEnter={handleShowCreditText}
               onClick={() => navigateTo("/buy-credit")}
               className="bg-blue-100 text-white px-4  flex items-center gap-2 sm:px-6 py-1.5 sm:py-2 rounded-full hover:scale-105 transition-transform"
             >
               <img src={assets.credit_star} alt="" />
-              <p className="text-xs sm:text-sm font-medium text-gray-600">
+              <p
+                className={`text-xs hidden lg:flex font-medium text-gray-600 ${
+                  showCreditText ? "flex" : ""
+                } `}
+              >
                 credit left :{credit}
               </p>
             </button>
-            <p className="text-xs sm:text-sm mx-sm:hidden pl-4">
+            <p className={`text-xs sm:text-sm mx-sm:hidden pl-4 `}>
               Hi,{user?.name}
             </p>
             <div className="relative group">

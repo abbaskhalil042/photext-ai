@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
+import { ModeToggle } from "./mode-toggle";
 
 const Navbar = () => {
   const [hoverShown, setHoverShown] = useState(false);
@@ -32,6 +33,7 @@ const Navbar = () => {
         <img src={assets.logo} alt="" className="w-6 lg:w-8 " />
         <span className="text-2xl sm:text-3xl font-semibold">Photext</span>
       </Link>
+      
 
       <div>
         {user ? (
@@ -72,6 +74,7 @@ const Navbar = () => {
                 </ul>
               </div>
             </div>
+            <ModeToggle />
           </div>
         ) : (
           <div className="flex items-center gap-2 sm:gap-4">
@@ -93,6 +96,7 @@ const Navbar = () => {
           </div>
         )}
       </div>
+  
     </div>
   );
 };

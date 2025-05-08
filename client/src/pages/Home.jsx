@@ -1,3 +1,4 @@
+import { ModeToggle } from "@/components/mode-toggle";
 import Description from "../components/Description";
 import GenerateButton from "../components/GenerateButton";
 import Header from "../components/Header";
@@ -9,6 +10,7 @@ const Home = () => {
     <div
    
     >
+ 
       <Header />
       <Steps />
       <Description />

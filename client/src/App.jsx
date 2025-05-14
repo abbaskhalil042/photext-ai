@@ -12,7 +12,7 @@ import { ThemeProvider } from "./components/theme-provider";
 const App = () => {
   const { showLogin } = useContext(AppContext);
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+    // <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <div
         className="px-4 sm:px-10 md:px-20 lg:px-35 min-h-screen bg-[#f0f1ea]"
       >
@@ -28,7 +28,7 @@ const App = () => {
         </Routes>
         <Footer />
       </div>
-    </ThemeProvider>
+    // </ThemeProvider>
   );
 };
 

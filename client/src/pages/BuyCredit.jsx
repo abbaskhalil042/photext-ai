@@ -66,7 +66,6 @@ function BuyCredit() {
       receipt: `receipt#${order.orderId}`,
       handler: async function (response) {
         try {
-
           const verifyPayload = {
             razorpay_order_id: response.razorpay_order_id,
             razorpay_payment_id: response.razorpay_payment_id,
@@ -108,7 +107,7 @@ function BuyCredit() {
       transition={{ duration: 1 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="min-h-[80vh] flex flex-col items-center pt-14 mb-10"
+      className="min-h-[80vh] flex flex-col items-center lg:10 pt-32 mb-10"
     >
       <button className="border border-gray-400 px-10 py-2 rounded-full mb-6">
         Our Plans

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import logo from "../../public/favicon.svg";
 
 function BuyCredit() {
   const { user, backendUrl, loadCreditData, token, setShowLogin } =
@@ -120,21 +121,57 @@ function BuyCredit() {
         {plans.map((plan, index) => (
           <div
             key={index}
-            className="w-[15rem] bg-white drop-shadow-sm rounded-lg py-12 px-8 text-gray-600 hover:scale-105 transition-all duration-500"
+            className="relative w-[15rem] bg-gradient-to-br from-white/80 to-white shadow-md rounded-xl py-10 px-6 text-gray-700 hover:scale-105 hover:shadow-xl transition-all duration-500"
           >
-            <img width={40} src={assets.logo_icon} alt="" />
-            <p className="mt-3 mb-1 font-semibold">{plan.id}</p>
-            <p className="text-sm">{plan.desc}</p>
-            <p className="text-3xl font-medium">
-              ${plan.price} /{" "}
-              <span className="text-sm"> {plan.credits} credits</span>
+            {/* Optional Badge */}
+            {plan.tag && (
+              <span className="absolute top-3 right-3 bg-blue-600 text-white text-xs px-2 py-1 rounded-full shadow-sm">
+                {plan.tag}
+              </span>
+            )}
+
+            {/* Logo */}
+            <img
+              width={40}
+              src={logo}
+              alt={`${plan.id} logo`}
+              className="mb-3"
+            />
+
+            {/* Plan Name */}
+            <p className="text-lg font-bold text-gray-900">{plan.id}</p>
+
+            {/* Description */}
+            <p className="text-sm text-gray-600 mt-1">{plan.desc}</p>
+
+            {/* Pricing Info */}
+            <p className="mt-4 text-3xl font-bold text-gray-900">
+              ${plan.price}
+              <span className="text-sm font-normal text-gray-500">
+                {" "}
+                / {plan.credits} credits
+              </span>
             </p>
+
+            {/* Quick Feature Highlights (optional) */}
+            <ul className="mt-4 text-sm space-y-1">
+              <li>✔️ Instant activation</li>
+              <li>✔️ No hidden fees</li>
+              <li>✔️ Secure payments</li>
+            </ul>
+
+            {/* CTA Button */}
             <button
               onClick={() => paymentRazorpay(plan.id)}
-              className="w-full bg-gray-800 p-2 text-white rounded-lg mt-4 text-sm min-w-50"
+              className="w-full bg-gray-800 hover:bg-gray-900 transition-colors p-2.5 text-white rounded-full mt-6 text-sm"
             >
               {user ? "Purchase" : "Get Started"}
             </button>
+
+            {/* Subtle Note */}
+            <p className="mt-2 text-xs text-gray-400 text-center">
+              Cancel anytime. No questions asked.
+            </p>
           </div>
         ))}
       </div>
